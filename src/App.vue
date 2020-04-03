@@ -1,10 +1,19 @@
 <template>
   <div id="app">
     <h1>Problema de Monty Hall</h1>
+    <GiftComponent />
   </div>
 </template>
 
-<script></script>
+<script>
+import GiftComponent from "./components/Gift";
+export default {
+  name: "App",
+  components: {
+    GiftComponent,
+  },
+};
+</script>
 
 <style>
 * {
