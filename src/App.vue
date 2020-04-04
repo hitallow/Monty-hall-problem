@@ -1,16 +1,16 @@
 <template>
   <div id="app">
     <h1>Problema de Monty Hall</h1>
-    <GiftComponent />
+    <DoorComponent number="1" :hasGift="true"/>
   </div>
 </template>
 
 <script>
-import GiftComponent from "./components/Gift";
+import DoorComponent from "./components/Door";
 export default {
   name: "App",
   components: {
-    GiftComponent,
+    DoorComponent,
   },
 };
 </script>
