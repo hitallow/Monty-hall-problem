@@ -1,18 +1,51 @@
 <template>
   <div id="app">
     <h1>Problema de Monty Hall</h1>
-    <DoorComponent number="1" :hasGift="true"/>
+    <div class="form">
+      <div v-if="!started">
+        <label for="portsAmount">Quantidade de portas</label>
+        <input
+          type="number"
+          id="portsAmount"
+          size="3"
+          v-model.number="portsAmount"
+        />
+      </div>
+      <div v-if="!started">
+        <label for="selectedPort">Qual a porta premiada</label>
+        <input
+          type="number"
+          id="selectedPort"
+          size="3"
+          v-model.number="selectedPort"
+        />
+      </div>
+      <button :disabled="!selectedPort" v-if="!started" @click="started = true">Iniciar</button>
+      <button v-if="started" @click="started = false">Reiniciar</button>
+    </div>
+    <div class="doors" v-if="started">
+      <div v-for="i in portsAmount" :key="i">
+        <DoorComponent :number="i" :hasGift="i === selectedPort" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import DoorComponent from "./components/Door";
+import DoorComponent from "./components/Door"
 export default {
   name: "App",
   components: {
     DoorComponent,
   },
-};
+  data() {
+    return {
+      started: false,
+      portsAmount: 3,
+      selectedPort: null,
+    }
+  },
+}
 </script>
 
 <style>
@@ -34,5 +67,24 @@ body {
   background-color: #0004;
   padding: 20px;
   margin-bottom: 60px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.form,
+.form input,
+.form button {
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+.doors {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 </style>
